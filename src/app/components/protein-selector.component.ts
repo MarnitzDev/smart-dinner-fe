@@ -6,7 +6,6 @@ const PROTEIN_OPTIONS = [
   { label: 'Pork', value: 'pork', icon: '🍖' },
   { label: 'Fish', value: 'fish', icon: '🐟' },
   { label: 'Eggs', value: 'eggs', icon: '🥚' },
-  { label: 'None', value: 'none', icon: '❌' },
 ];
 
 @Component({
