@@ -1,0 +1,47 @@
+.summary-step {
+  background: #f8fff8;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 12px rgba(76,175,80,0.08);
+  padding: 2rem 2.5rem 2rem 2.5rem;
+  margin: 0 auto;
+  max-width: 420px;
+  min-width: 260px;
+  text-align: left;
+}
+.summary-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #256029;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.08rem;
+}
+.summary-list > li {
+  margin-bottom: 1.1em;
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-weight: 600;
+  color: #388e3c;
+  margin-bottom: 0.2em;
+}
+.value {
+  color: #222;
+  font-weight: 500;
+}
+.sub-list {
+  margin: 0.2em 0 0 1.2em;
+  padding: 0;
+  list-style: disc inside;
+  color: #444;
+  font-size: 0.98em;
+}
+.sub-list li {
+  margin-bottom: 0.1em;
+}
