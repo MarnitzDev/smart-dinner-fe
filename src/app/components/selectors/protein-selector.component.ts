@@ -17,25 +17,19 @@ const PROTEIN_OPTIONS: Option<string>[] = [
 		<app-option-selector
 			[title]="'What type of main protein do you want?'"
 			[options]="options"
-			[selected]="selectedSignal"
-			(selectedChange)="onSelected($event)"
+			[selected]="selected"
+			(selectedChange)="select($event)"
 		></app-option-selector>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProteinSelectorComponent {
 	options = PROTEIN_OPTIONS;
-	@Input() selected: string | null = null;
-	private _selected = signal<string | null>(null);
-
+	@Input({ required: true }) selected = signal<string | null>(null);
 	@Output() proteinSelected = new EventEmitter<string>();
 
-	get selectedSignal() {
-		return this.selected !== null ? signal(this.selected) : this._selected;
-	}
-
-	onSelected(value: string) {
-		this._selected.set(value);
+	select(value: string) {
+		this.selected.set(value);
 		this.proteinSelected.emit(value);
 	}
 }
