@@ -3,11 +3,12 @@ import { DietTypeSelectorComponent } from './components/selectors/diet-type-sele
 import { ProteinSelectorComponent } from './components/selectors/protein-selector.component';
 import { MoodSelectorComponent } from './components/selectors/mood-selector.component';
 import { CommonModule } from '@angular/common';
+import { IngredientMultiselectComponent } from './components/ingredient-multiselect.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, DietTypeSelectorComponent, ProteinSelectorComponent, MoodSelectorComponent],
+  imports: [CommonModule, DietTypeSelectorComponent, ProteinSelectorComponent, MoodSelectorComponent, IngredientMultiselectComponent],
   template: `
     <main class="home-container">
       <section class="intro">
@@ -41,7 +42,21 @@ import { CommonModule } from '@angular/common';
                 <app-mood-selector (moodSelected)="onMoodSelected($event)" [selected]="mood"></app-mood-selector>
                 <div class="stepper-actions">
                   <button type="button" class="back-btn" (click)="back()">&#8592; Back</button>
-                  <button type="submit" class="next-btn" [disabled]="!mood()">Submit</button>
+                  <button type="button" class="next-btn" [disabled]="!mood()" (click)="next()" *ngIf="mood()">
+                    Next
+                    <svg viewBox="0 0 20 20" style="width:1.1em;height:1.1em;vertical-align:middle;fill:currentColor;margin-left:0.3em;"><path d="M7.293 15.707a1 1 0 0 1 0-1.414L11.586 10 7.293 5.707a1 1 0 1 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0z"/></svg>
+                  </button>
+                </div>
+              </section>
+              <section *ngSwitchCase="3">
+                <app-ingredient-multiselect
+                  [selected]="ingredients"
+                  [dietType]="dietType"
+                  (selectedChange)="onIngredientsChange($event)">
+                </app-ingredient-multiselect>
+                <div class="stepper-actions">
+                  <button type="button" class="back-btn" (click)="back()">&#8592; Back</button>
+                  <button type="submit" class="next-btn" [disabled]="!ingredients().length">Submit</button>
                 </div>
               </section>
             </ng-container>
@@ -58,6 +73,7 @@ export class HomeComponent {
   diet = signal<string | null>(null);
   protein = signal<string | null>(null);
   mood = signal<string | null>(null);
+  ingredients = signal<string[]>([]);
 
   onDietSelected(diet: string) {
     this.diet.set(diet);
@@ -74,6 +90,10 @@ export class HomeComponent {
     this.mood.set(mood);
   }
 
+  onIngredientsChange(ingredients: string[]) {
+    this.ingredients.set(ingredients);
+  }
+
   next() {
     if (this.step() === 0 && this.diet() === 'non-vegetarian') {
       this.step.set(1);
@@ -81,11 +101,15 @@ export class HomeComponent {
       this.step.set(2);
     } else if (this.step() === 1) {
       this.step.set(2);
+    } else if (this.step() === 2) {
+      this.step.set(3);
     }
   }
 
   back() {
-    if (this.step() === 2 && this.diet() === 'non-vegetarian') {
+    if (this.step() === 3) {
+      this.step.set(2);
+    } else if (this.step() === 2 && this.diet() === 'non-vegetarian') {
       this.step.set(1);
     } else if (this.step() === 2 && this.diet() !== 'non-vegetarian') {
       this.step.set(0);
@@ -94,12 +118,19 @@ export class HomeComponent {
     }
   }
 
+  get dietType(): 'vegetarian' | 'vegan' | 'non-vegetarian' {
+    if (this.diet() === 'non-vegetarian') return 'non-vegetarian';
+    if (this.diet() === 'vegan') return 'vegan';
+    return 'vegetarian';
+  }
+
   onSubmit() {
     // TODO: handle form submission
     console.log('Form submitted:', {
       diet: this.diet(),
       protein: this.protein(),
-      mood: this.mood()
+      mood: this.mood(),
+      ingredients: this.ingredients()
     });
   }
 }
