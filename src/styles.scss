@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+
+@use './app/styles/_colors.scss' as *;
+@use './app/styles/_buttons.scss' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Gellix:wght@600&display=swap');
+
+body, html {
+	font-family: 'Gellix', 'Gellix-Semibold', sans-serif;
+}
+

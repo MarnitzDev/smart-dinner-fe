@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { INGREDIENT_SUGGESTIONS } from '../ingredient-suggestions.json';
 import { IngredientMultiselectComponent } from '../ingredient-multiselect.component';
 
 @Component({

@@ -1,7 +1,29 @@
+@use '../styles/_colors.scss' as *;
+
+.chip .remove-btn {
+  background: none;
+  border: none;
+  color: $primary-dark;
+  font-size: 1.1em;
+  margin-left: 0.4em;
+  cursor: pointer;
+  padding: 0 0.3em;
+  border-radius: 50%;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chip .remove-btn:hover, .chip .remove-btn:focus {
+  background: $primary-light;
+  color: $primary;
+}
+
 .chips-label {
   font-size: 1.04rem;
   font-weight: 600;
-  color: #388e3c;
+  color: $primary;
   margin: 0.2rem 0 0.2rem 0.1rem;
   letter-spacing: 0.01em;
   display: flex;
@@ -18,6 +40,7 @@
   font-size: 1.15rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 .chips-container {
   display: flex;
@@ -28,38 +51,34 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  background: #e8f5e9;
-  color: #256029;
+  background: $primary-light;
+  color: $text-primary;
   border-radius: 1.2em;
-  padding: 0.3em 0.9em 0.3em 0.8em;
   font-size: 1rem;
   font-weight: 500;
-  box-shadow: 0 1px 4px rgba(76,175,80,0.07);
+  border: 1.2px solid $primary;
+  padding: 0.32em 1em 0.32em 0.9em;
+  margin: 0.1em 0.2em 0.1em 0;
+  box-shadow: 0 1px 6px rgba(90,192,184,0.10);
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
 }
-.remove-btn {
-  background: none;
-  border: none;
-  color: #388e3c;
-  font-size: 1.1em;
-  margin-left: 0.3em;
-  cursor: pointer;
-  padding: 0 0.2em;
-  border-radius: 50%;
-  transition: background 0.15s;
+.chip:hover, .chip:focus {
+  background: $primary;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(90,192,184,0.18);
 }
 .remove-btn:hover, .remove-btn:focus {
-  background: #c8e6c9;
+  background: $primary-light;
+  color: $primary;
 }
+
 .ingredient-input {
   padding: 0.7em 1em;
-  border: 1.5px solid #bdbdbd;
+  border: 1.5px solid $neutral-border;
   border-radius: 1.2em;
   font-size: 1.08rem;
   outline: none;
   transition: border 0.15s;
-}
-.ingredient-input:focus {
-  border-color: #4caf50;
 }
 .input-row {
   display: flex;
@@ -69,28 +88,5 @@
 
 .center-row {
   justify-content: center;
-}
-.add-btn {
-  padding: 0.6em 1.2em;
-  border: none;
-  border-radius: 1.2em;
-  background: linear-gradient(90deg, #4caf50 60%, #81c784 100%);
-  color: #fff;
-  font-size: 1.05rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
-  box-shadow: 0 1px 4px rgba(76,175,80,0.07);
-  outline: none;
-}
-.add-btn:disabled {
-  background: #c8e6c9;
-  color: #7cb342;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-.add-btn:not(:disabled):hover, .add-btn:not(:disabled):focus {
-  background: linear-gradient(90deg, #388e3c 60%, #66bb6a 100%);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(76,175,80,0.13);
+  border-color: $primary;
 }

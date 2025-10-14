@@ -8,7 +8,7 @@ import { INGREDIENT_SUGGESTIONS } from './ingredient-suggestions.json';
   imports: [CommonModule],
   template: `
     <div class="ingredient-multiselect">
-  <h2 class="prompt">{{ prompt }}</h2>
+      <h2 class="prompt">{{ prompt }}</h2>
       <div class="input-row center-row">
         <input
           type="text"
@@ -21,7 +21,7 @@ import { INGREDIENT_SUGGESTIONS } from './ingredient-suggestions.json';
           autocomplete="off"
           aria-label="Ingredient search"
         />
-        <button type="button" class="add-btn" (click)="addIngredient()" [disabled]="!inputValue.trim()">Add</button>
+        <button type="button" class="btn btn-primary" (click)="addIngredient()" [disabled]="!inputValue.trim()">Add</button>
       </div>
       <div class="chips-label" *ngIf="selected().length">
         <span>{{ chipsLabel }}</span>
