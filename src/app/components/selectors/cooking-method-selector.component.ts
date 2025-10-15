@@ -8,7 +8,6 @@ import { OptionSelectorComponent, Option } from '../option-selector.component';
   template: `
     <div class="selector-container">
       <app-option-selector
-        [title]="'Choose a cooking method'"
         [options]="cookingMethods"
         [selected]="selected"
         (selectedChange)="selectedChange.emit($event)"

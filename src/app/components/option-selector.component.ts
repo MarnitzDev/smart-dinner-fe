@@ -13,7 +13,6 @@ export interface Option<T> {
   imports: [CommonModule],
   template: `
     <div class="option-selector">
-      <h2 class="prompt">{{ title }}</h2>
       <div class="options">
         @for (option of options; track option.value) {
           <button
@@ -34,7 +33,6 @@ export interface Option<T> {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OptionSelectorComponent<T> {
-  @Input() title = '';
   @Input() options: Option<T>[] = [];
   @Input() selected = signal<T | null>(null);
   @Output() selectedChange = new EventEmitter<T>();

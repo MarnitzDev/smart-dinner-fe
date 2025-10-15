@@ -13,7 +13,6 @@ const DIET_OPTIONS: Option<string>[] = [
 	imports: [OptionSelectorComponent],
 	template: `
 		<app-option-selector
-			[title]="'Do you prefer vegetarian, vegan, or non-vegetarian?'"
 			[options]="options"
 			[selected]="selected"
 			(selectedChange)="select($event)"

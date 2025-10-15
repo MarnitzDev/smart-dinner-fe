@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DietTypeSelectorComponent } from './components/selectors/diet-type-selector.component';
 import { MoodSelectorComponent } from './components/selectors/mood-selector.component';
@@ -13,7 +13,7 @@ import { SummaryComponent } from './components/summary.component';
   standalone: true,
   imports: [CommonModule, HttpClientModule, DietTypeSelectorComponent, CookingMethodSelectorComponent, MoodSelectorComponent, IngredientsIncludedComponent, IngredientsExcludedComponent, SummaryComponent],
   template: `
-    <main>
+    <main class="home-container">
       <header class="main-header">
         <h1>Smart Dinner Recipe Suggester</h1>
         <div class="subtitle">Get personalized meal ideas in just a few steps</div>
@@ -21,6 +21,7 @@ import { SummaryComponent } from './components/summary.component';
       <div class="main-content-row">
         <section class="stepper-form">
           <div class="stepper-card-center">
+            <div class="step-title">{{ stepTitle() }}</div>
             <div class="stepper-card" #stepperCard>
               <ng-container [ngSwitch]="step()">
                 <section *ngSwitchCase="0">
@@ -58,7 +59,6 @@ import { SummaryComponent } from './components/summary.component';
                   <div *ngIf="loading()" class="result-loading">Loading suggestions...</div>
                   <div *ngIf="error()" class="result-error">{{ error() }}</div>
                   <div *ngIf="suggestions().length" class="result-list">
-                    <h2>Recipe Suggestions</h2>
                     <div class="recipe-cards">
                       <div class="recipe-card" *ngFor="let recipe of suggestions()">
                         <h3>{{ recipe.title }}</h3>
@@ -75,7 +75,6 @@ import { SummaryComponent } from './components/summary.component';
                 </section>
               </ng-container>
             </div>
-            <!-- Stepper Actions: Always below the card -->
             <div class="stepper-actions">
               <ng-container [ngSwitch]="step()">
                 <ng-container *ngSwitchCase="0">
@@ -116,10 +115,10 @@ import { SummaryComponent } from './components/summary.component';
                 </ng-container>
               </ng-container>
             </div>
-          </div>
-        </section>
-      </div>
-    </main>
+          <!-- end .stepper-card-center -->
+        <!-- end .stepper-form -->
+      <!-- end .main-content-row -->
+    <!-- end main -->
   `,
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -142,8 +141,6 @@ export class HomeComponent {
     this.diet.set(diet);
   }
 
-
-
   onMoodSelected(mood: string) {
     this.mood.set(mood);
   }
@@ -165,6 +162,18 @@ export class HomeComponent {
   loading = signal(false);
   error = signal<string | null>(null);
 
+  stepTitle = computed(() => {
+    switch (this.step()) {
+      case 0: return 'Step 1: Choose Your Diet Type';
+      case 1: return 'Step 2: Select Your Current Mood';
+      case 2: return 'Step 3: Preferred Cooking Method';
+      case 3: return 'Step 4: Ingredients You Have or Want to Use';
+      case 4: return 'Step 5: Ingredients to Avoid';
+      case 5: return 'Step 6: Review Your Choices';
+      case 6: return 'Recipe Suggestions';
+      default: return '';
+    }
+  });
   onGenerateRecipes() {
     this.step.set(6); 
     const payload = {

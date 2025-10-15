@@ -1,15 +1,10 @@
-@import '../styles/_colors.scss';
+@use '../styles/_colors.scss' as *;
+
 .option-selector {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-}
-.prompt {
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  text-align: center;
 }
 .options {
   display: flex;

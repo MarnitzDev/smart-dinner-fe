@@ -10,8 +10,6 @@ import { IngredientMultiselectComponent } from '../ingredient-multiselect.compon
     <app-ingredient-multiselect
       [selected]="selected"
       [dietType]="dietType"
-      [chipsLabel]="'Included items:'"
-      [prompt]="'Select ingredients you have or want to use'"
       (selectedChange)="selectedChange.emit($event)">
     </app-ingredient-multiselect>
   `,

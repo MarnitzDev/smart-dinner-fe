@@ -8,7 +8,6 @@ import { INGREDIENT_SUGGESTIONS } from './ingredient-suggestions.json';
   imports: [CommonModule],
   template: `
     <div class="ingredient-multiselect">
-      <h2 class="prompt">{{ prompt }}</h2>
       <div class="input-row center-row">
         <input
           type="text"
@@ -22,9 +21,6 @@ import { INGREDIENT_SUGGESTIONS } from './ingredient-suggestions.json';
           aria-label="Ingredient search"
         />
         <button type="button" class="btn btn-primary" (click)="addIngredient()" [disabled]="!inputValue.trim()">Add</button>
-      </div>
-      <div class="chips-label" *ngIf="selected().length">
-        <span>{{ chipsLabel }}</span>
       </div>
       <div class="chips-container">
         @for (ingredient of selected(); track ingredient) {
@@ -45,8 +41,6 @@ import { INGREDIENT_SUGGESTIONS } from './ingredient-suggestions.json';
 export class IngredientMultiselectComponent {
   @Input() dietType: 'vegetarian' | 'vegan' | 'non-vegetarian' = 'vegetarian';
   @Input() selected = signal<string[]>([]);
-  @Input() chipsLabel: string = 'Included items:';
-  @Input() prompt: string = 'Select ingredients you have or want to use';
   @Output() selectedChange = new EventEmitter<string[]>();
 
   get suggestions(): string[] {

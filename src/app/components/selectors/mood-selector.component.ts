@@ -15,7 +15,6 @@ const MOOD_OPTIONS: Option<string>[] = [
 	imports: [OptionSelectorComponent],
 	template: `
 		<app-option-selector
-			[title]="'What kind of recipe are you in the mood for?'"
 			[options]="options"
 			[selected]="selected"
 			(selectedChange)="select($event)"

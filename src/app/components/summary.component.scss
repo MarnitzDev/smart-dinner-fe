@@ -1,4 +1,5 @@
-@import '../styles/_colors.scss';
+@use '../styles/_colors.scss' as *;
+
 .summary-step {
   background: $neutral-bg;
   border-radius: 1.5rem;
