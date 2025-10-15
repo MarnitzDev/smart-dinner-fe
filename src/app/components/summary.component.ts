@@ -7,20 +7,40 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div class="summary-step">
-      <h2 class="summary-title">Summary</h2>
       <ul class="summary-list">
-        <li><span class="label">Diet:</span> <span class="value">{{ diet }}</span></li>
-        <li *ngIf="diet === 'non-vegetarian'"><span class="label">Protein:</span> <span class="value">{{ protein }}</span></li>
-        <li><span class="label">Mood:</span> <span class="value">{{ mood }}</span></li>
-        <li><span class="label">Ingredients:</span>
-          <ul class="sub-list">
-            <li *ngFor="let ing of ingredients">{{ ing }}</li>
-          </ul>
+        <li class="summary-row">
+          <span class="label">Diet:</span>
+          <span class="value">{{ diet }}</span>
         </li>
-        <li><span class="label">Constraints:</span>
-          <ul class="sub-list">
-            <li *ngFor="let c of constraints">{{ c }}</li>
-          </ul>
+        <li class="summary-row" *ngIf="diet === 'non-vegetarian'">
+          <span class="label">Protein:</span>
+          <span class="value">{{ protein }}</span>
+        </li>
+        <li class="summary-row">
+          <span class="label">Mood:</span>
+          <span class="value">{{ mood }}</span>
+        </li>
+        <li class="summary-row">
+          <span class="label">Method:</span>
+          <span class="value">{{ cookingMethod || 'none' }}</span>
+        </li>
+        <li class="summary-row align-top">
+          <span class="label">Ingredients:</span>
+          <span class="value">
+            <ul class="sub-list" *ngIf="ingredients && ingredients.length; else noIngredients">
+              <li *ngFor="let ing of ingredients">{{ ing }}</li>
+            </ul>
+            <ng-template #noIngredients><span class="none">none</span></ng-template>
+          </span>
+        </li>
+        <li class="summary-row align-top">
+          <span class="label">Constraints:</span>
+          <span class="value">
+            <ul class="sub-list" *ngIf="constraints && constraints.length; else noConstraints">
+              <li *ngFor="let c of constraints">{{ c }}</li>
+            </ul>
+            <ng-template #noConstraints><span class="none">none</span></ng-template>
+          </span>
         </li>
       </ul>
     </div>
@@ -32,6 +52,7 @@ export class SummaryComponent {
   @Input() diet: string | null = null;
   @Input() protein: string | null = null;
   @Input() mood: string | null = null;
+  @Input() cookingMethod: string | null = null;
   @Input() ingredients: string[] = [];
   @Input() constraints: string[] = [];
 }

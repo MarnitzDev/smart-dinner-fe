@@ -51,6 +51,7 @@ import { SummaryComponent } from './components/summary.component';
                   <app-summary
                     [diet]="diet()"
                     [mood]="mood()"
+                    [cookingMethod]="cookingMethod()"
                     [ingredients]="ingredients()"
                     [constraints]="constraints()"
                   ></app-summary>
@@ -128,40 +129,54 @@ export class HomeComponent {
   diet = signal<string | null>(null);
   cookingMethod = signal<string | null>(null);
   mood = signal<string | null>(null);
-  onCookingMethodSelected(method: string) {
-    this.cookingMethod.set(method);
-  }
   ingredients = signal<string[]>([]);
   constraints = signal<string[]>([]);
-  onConstraintsChange(constraints: string[]) {
-    this.constraints.set(constraints);
-  }
-
-  onDietSelected(diet: string) {
-    this.diet.set(diet);
-  }
-
-  onMoodSelected(mood: string) {
-    this.mood.set(mood);
-  }
-
-  onIngredientsChange(ingredients: string[]) {
-    this.ingredients.set(ingredients);
-  }
-
-  next() {
-    this.step.set(this.step() + 1);
-  }
-
-  back() {
-    this.step.set(Math.max(0, this.step() - 1));
-  }
-  constructor(private http: HttpClient) {}
-
   suggestions = signal<any[]>([]);
   loading = signal(false);
   error = signal<string | null>(null);
 
+  carouselIndex = 0;
+
+  constructor(private http: HttpClient) {
+    // Watch for suggestions changes to reset carousel
+    const origSet = this.suggestions.set;
+    this.suggestions.set = (val: any[]) => {
+      this.carouselIndex = 0;
+      origSet.call(this.suggestions, val);
+    };
+  }
+
+  onCookingMethodSelected(method: string) {
+    this.cookingMethod.set(method);
+  }
+  onConstraintsChange(constraints: string[]) {
+    this.constraints.set(constraints);
+  }
+  onDietSelected(diet: string) {
+    this.diet.set(diet);
+  }
+  onMoodSelected(mood: string) {
+    this.mood.set(mood);
+  }
+  onIngredientsChange(ingredients: string[]) {
+    this.ingredients.set(ingredients);
+  }
+  next() {
+    this.step.set(this.step() + 1);
+  }
+  back() {
+    this.step.set(Math.max(0, this.step() - 1));
+  }
+  carouselPrev() {
+    if (this.carouselIndex > 0) {
+      this.carouselIndex -= 3;
+    }
+  }
+  carouselNext() {
+    if (this.carouselIndex + 3 < this.suggestions().length) {
+      this.carouselIndex += 3;
+    }
+  }
   stepTitle = computed(() => {
     switch (this.step()) {
       case 0: return 'Step 1: Choose Your Diet Type';
@@ -175,7 +190,7 @@ export class HomeComponent {
     }
   });
   onGenerateRecipes() {
-    this.step.set(6); 
+    this.step.set(6);
     const payload = {
       diet: this.diet(),
       cookingMethod: this.cookingMethod(),
@@ -199,13 +214,11 @@ export class HomeComponent {
       }
     });
   }
-
   get dietType(): 'vegetarian' | 'vegan' | 'non-vegetarian' {
     if (this.diet() === 'non-vegetarian') return 'non-vegetarian';
     if (this.diet() === 'vegan') return 'vegan';
     return 'vegetarian';
   }
-
   onSubmit() {
     // TODO: handle form submission
     console.log('Form submitted:', {

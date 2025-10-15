@@ -1,7 +1,6 @@
 @use '../styles/_colors.scss' as *;
 
 .summary-step {
-  background: $neutral-bg;
   border-radius: 1.5rem;
   box-shadow: 0 2px 12px $neutral-shadow;
   padding: 2rem 2.5rem 2rem 2.5rem;
@@ -23,19 +22,29 @@
   margin: 0;
   font-size: 1.08rem;
 }
-.summary-list > li {
-  margin-bottom: 1.1em;
+.summary-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin-bottom: 1.1em;
+}
+.summary-row.align-top {
+  align-items: flex-start;
 }
 .label {
   font-weight: 600;
   color: $primary-dark;
-  margin-bottom: 0.2em;
+  min-width: 110px;
+  margin-bottom: 0;
+  text-align: left;
 }
 .value {
   color: $text-main;
   font-weight: 500;
+  flex: 1 1 0%;
+  text-align: left;
 }
 .sub-list {
   margin: 0.2em 0 0 1.2em;
