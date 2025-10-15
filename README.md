@@ -1,59 +1,42 @@
-# SmartDinner
+# Smart Dinner
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+Get personalized meal ideas in just a few steps! Smart Dinner is a modern, responsive web app that suggests recipes based on your diet, mood, cooking method, and available ingredients.
 
-## Development server
+## Live Demo
 
-To start a local development server, run:
+[https://smartdinner.marnitzmalan.com/](https://smartdinner.marnitzmalan.com/)
 
-```bash
-ng serve
-```
+## Screenshots
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<div align="center">
+	<img src="public/screenshots/screenshot_01.png" alt="Smart Dinner Screenshot 1" />
+	<img src="public/screenshots/screenshot_02.png" alt="Smart Dinner Screenshot 2" />
+	<img src="public/screenshots/screenshot_03.png" alt="Smart Dinner Screenshot 3" />
+    <img src="public/screenshots/screenshot_04.png" alt="Smart Dinner Screenshot 4" />
+</div>
 
-## Code scaffolding
+## Features
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Multi-step recipe suggestion flow
+- Select diet type, mood, and preferred cooking method
+- Multi-select for ingredients to include/exclude
+- AI-powered recipe suggestions from a backend API
+- Responsive, mobile-friendly design
+- Easy "Start Over" to try new combinations
+- Fast, modern UI with beautiful visuals
 
-```bash
-ng generate component component-name
-```
+## Tech Stack
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Frontend
+- Angular 20 (standalone components, signals)
+- TypeScript
+- SCSS (modular, responsive)
+- Deployed on Railway
 
-```bash
-ng generate --help
-```
+### Backend
 
-## Building
+[https://github.com/MarnitzDev/smart-dinner-be](https://github.com/MarnitzDev/smart-dinner-be/)
 
-To build the project run:
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+Made with ❤️ by Marnitz Malan
