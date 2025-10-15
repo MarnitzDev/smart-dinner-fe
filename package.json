@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "serve -s dist/your-app-name -l $PORT",
+    "start": "serve -s dist -l $PORT",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -22,6 +22,7 @@
   },
   "private": true,
   "dependencies": {
+    "serve": "^14.2.0",
     "@angular/animations": "^20.3.4",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
