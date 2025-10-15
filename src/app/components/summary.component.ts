@@ -12,10 +12,6 @@ import { CommonModule } from '@angular/common';
           <span class="label">Diet:</span>
           <span class="value">{{ diet }}</span>
         </li>
-        <li class="summary-row" *ngIf="diet === 'non-vegetarian'">
-          <span class="label">Protein:</span>
-          <span class="value">{{ protein }}</span>
-        </li>
         <li class="summary-row">
           <span class="label">Mood:</span>
           <span class="value">{{ mood }}</span>
@@ -50,7 +46,6 @@ import { CommonModule } from '@angular/common';
 })
 export class SummaryComponent {
   @Input() diet: string | null = null;
-  @Input() protein: string | null = null;
   @Input() mood: string | null = null;
   @Input() cookingMethod: string | null = null;
   @Input() ingredients: string[] = [];

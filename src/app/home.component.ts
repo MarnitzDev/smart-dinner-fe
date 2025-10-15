@@ -58,9 +58,12 @@ import { RecipeResultsComponent } from './components/recipe-results.component';
                   ></app-summary>
                 </section>
                 <section *ngSwitchCase="6">
-                  <div *ngIf="loading()" class="result-loading">Loading suggestions...</div>
+                  <div *ngIf="loading()" class="result-loading">Generating suggestions...</div>
                   <div *ngIf="error()" class="result-error">{{ error() }}</div>
                   <app-recipe-results *ngIf="suggestions().length" [suggestions]="suggestions()"></app-recipe-results>
+                  <div *ngIf="suggestions().length" class="start-over-row">
+                    <button type="button" class="btn btn-primary start-over-btn" (click)="restart()">Start Over</button>
+                  </div>
                 </section>
               </ng-container>
             </div>
@@ -216,5 +219,16 @@ export class HomeComponent {
       ingredients: this.ingredients(),
       constraints: this.constraints(),
     });
+  }
+  restart() {
+    this.step.set(0);
+    this.diet.set(null);
+    this.cookingMethod.set(null);
+    this.mood.set(null);
+    this.ingredients.set([]);
+    this.constraints.set([]);
+    this.suggestions.set([]);
+    this.loading.set(false);
+    this.error.set(null);
   }
 }
