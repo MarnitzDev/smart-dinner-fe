@@ -1,10 +1,55 @@
-.results-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 1.2rem;
-  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
+.results-title {
+  text-align: center;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #1a3a1a;
+  margin-bottom: 2.2rem;
+  letter-spacing: -1px;
+}
+.suggestion-label {
+  display: inline-block;
+  color: #226622;
+  font-size: 1.08rem;
+  font-weight: 700;
+  border-radius: 2em;
+  margin-bottom: 1.1em;
+  margin-top: -1.2em;
+  letter-spacing: 0.03em;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.suggestion-label:hover {
+  box-shadow: 0 6px 24px 0 rgba(60,120,60,0.13), 0 2px 0 #b6e6b6 inset;
+  border-color: #7fd87f;
+}
+
+.recipe-title {
+  font-size: 1.22rem;
+  font-weight: 600;
+  color: #1a3a1a;
+  margin: 0 0 0.3em 0;
+  letter-spacing: -0.5px;
+}
+.recipe-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a3a1a;
+  margin: 0 0 0.3em 0;
+}
+.recipe-description {
+  color: #3a5a3a;
+  font-size: 1.08rem;
+  margin-bottom: 0.7em;
+}
+.ingredients-label {
+  color: #2a4a2a;
+  font-weight: 600;
+}
+.ingredients-ul {
+  margin: 0.2em 0 0 1.2em;
+  padding: 0;
 }
 
 .recipe-cards {
@@ -17,7 +62,6 @@
   border: 1px solid #e0e0e0;
   border-radius: 1rem;
   padding: 1.5rem;
-  background: #fafbfc;
 }
 
 .recipe-card h2 {

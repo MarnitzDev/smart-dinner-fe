@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { IngredientsIncludedComponent } from './components/selectors/ingredients-included.component';
 import { IngredientsExcludedComponent } from './components/selectors/ingredients-excluded.component';
 import { SummaryComponent } from './components/summary.component';
+import { RecipeResultsComponent } from './components/recipe-results.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, DietTypeSelectorComponent, CookingMethodSelectorComponent, MoodSelectorComponent, IngredientsIncludedComponent, IngredientsExcludedComponent, SummaryComponent],
+  imports: [CommonModule, HttpClientModule, DietTypeSelectorComponent, CookingMethodSelectorComponent, MoodSelectorComponent, IngredientsIncludedComponent, IngredientsExcludedComponent, SummaryComponent, RecipeResultsComponent],
   template: `
     <main class="home-container">
       <header class="main-header">
@@ -59,20 +60,7 @@ import { SummaryComponent } from './components/summary.component';
                 <section *ngSwitchCase="6">
                   <div *ngIf="loading()" class="result-loading">Loading suggestions...</div>
                   <div *ngIf="error()" class="result-error">{{ error() }}</div>
-                  <div *ngIf="suggestions().length" class="result-list">
-                    <div class="recipe-cards">
-                      <div class="recipe-card" *ngFor="let recipe of suggestions()">
-                        <h3>{{ recipe.title }}</h3>
-                        <p>{{ recipe.description }}</p>
-                        <div class="ingredients-list">
-                          <b>Ingredients:</b>
-                          <ul>
-                            <li *ngFor="let ing of recipe.ingredients">{{ ing }}</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <app-recipe-results *ngIf="suggestions().length" [suggestions]="suggestions()"></app-recipe-results>
                 </section>
               </ng-container>
             </div>
