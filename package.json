@@ -2,12 +2,11 @@
   "name": "smart-dinner",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+  "ng": "ng",
+    "build": "ng build --output-path=dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:prod": "npx serve -s dist/smart-dinner -l $PORT"
+    "start": "npx serve -s dist -l $PORT"
   },
   "prettier": {
     "printWidth": 100,
