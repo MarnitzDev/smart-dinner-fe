@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:prod": "npx serve -s dist/smart-dinner -l 0.0.0.0:$PORT"
+    "serve:prod": "npx serve -s dist/smart-dinner -l $PORT"
   },
   "prettier": {
     "printWidth": 100,
