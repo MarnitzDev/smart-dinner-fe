@@ -187,8 +187,11 @@ export class HomeComponent {
     }
   });
   onGenerateRecipes() {
+    console.log('[DEBUG] onGenerateRecipes called');
+    console.log('[DEBUG] environment.apiUrl:', environment.apiUrl);
     if (!environment.apiUrl) {
       this.error.set('API config not loaded. Please try again.');
+      console.error('[DEBUG] API config not loaded.');
       return;
     }
     this.step.set(6);
@@ -199,6 +202,7 @@ export class HomeComponent {
       ingredients: this.ingredients(),
       constraints: this.constraints(),
     };
+    console.log('[DEBUG] Payload:', payload);
     this.loading.set(true);
     this.error.set(null);
     this.suggestions.set([]);
@@ -206,12 +210,12 @@ export class HomeComponent {
       next: (result) => {
         this.suggestions.set(result.suggestions || []);
         this.loading.set(false);
-        console.log('Received suggestions:', result);
+        console.log('[DEBUG] Received suggestions:', result);
       },
       error: (err) => {
         this.error.set('Failed to fetch suggestions');
         this.loading.set(false);
-        console.error('Error from endpoint:', err);
+        console.error('[DEBUG] Error from endpoint:', err);
       }
     });
   }
