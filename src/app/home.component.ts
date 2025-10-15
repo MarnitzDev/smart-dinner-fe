@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment, loadAppConfig } from '../environments/environment';
 import { DietTypeSelectorComponent } from './components/selectors/diet-type-selector.component';
 import { MoodSelectorComponent } from './components/selectors/mood-selector.component';
 import { CookingMethodSelectorComponent } from './components/selectors/cooking-method-selector.component';
@@ -128,6 +129,8 @@ export class HomeComponent {
 
   carouselIndex = 0;
 
+  configLoaded = false;
+
   constructor(private http: HttpClient) {
     // Watch for suggestions changes to reset carousel
     const origSet = this.suggestions.set;
@@ -135,6 +138,9 @@ export class HomeComponent {
       this.carouselIndex = 0;
       origSet.call(this.suggestions, val);
     };
+    loadAppConfig().then(() => {
+      this.configLoaded = true;
+    });
   }
 
   onCookingMethodSelected(method: string) {
@@ -181,6 +187,10 @@ export class HomeComponent {
     }
   });
   onGenerateRecipes() {
+    if (!environment.apiUrl) {
+      this.error.set('API config not loaded. Please try again.');
+      return;
+    }
     this.step.set(6);
     const payload = {
       diet: this.diet(),
@@ -192,7 +202,7 @@ export class HomeComponent {
     this.loading.set(true);
     this.error.set(null);
     this.suggestions.set([]);
-    this.http.post<any>('http://localhost:5000/recipes/suggest', payload).subscribe({
+    this.http.post<any>(environment.apiUrl, payload).subscribe({
       next: (result) => {
         this.suggestions.set(result.suggestions || []);
         this.loading.set(false);
